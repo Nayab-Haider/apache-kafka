@@ -26,7 +26,6 @@ public class OrderServiceImpl implements OrderService{
 		if (order.getOrderLine().size() == 0) {
 			throw new IllegalArgumentException("No order lines!");
 		}
-		order.setUpdated(new Date());
 		Order result = orderRepository.save(order);
 		fireOrderCreatedEvent(order);
 		return result;

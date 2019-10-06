@@ -1,12 +1,13 @@
 package com.kafka.order.domain;
 
+import com.kafka.order.config.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-public class OrderLine {
+public class OrderLine extends Auditable<String>{
 
     @Column(name = "F_COUNT")
     private int count;

@@ -1,5 +1,6 @@
 package com.kafka.order.domain;
 
+import com.kafka.order.config.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "ORDERTABLE")
-public class Order {
+public class Order extends Auditable<String> {
 
     @Id
     @GeneratedValue
@@ -18,8 +19,6 @@ public class Order {
 
     @ManyToOne
     private Customer customer;
-
-    private Date updated;
 
     @Embedded
     @AttributeOverrides({@AttributeOverride(name = "street", column = @Column(name = "SHIPPING_STREET")),
@@ -39,30 +38,6 @@ public class Order {
     public Order() {
         super();
         orderLine = new ArrayList<OrderLine>();
-        updated();
-    }
-
-    private void updated() {
-        updated = new Date();
-    }
-
-    public void setShippingAddress(Address shippingAddress) {
-        updated();
-        this.shippingAddress = shippingAddress;
-    }
-
-    public Address getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(Address billingAddress) {
-        updated();
-        this.billingAddress = billingAddress;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-        updated();
     }
 
     public Order(Customer customer) {
@@ -71,14 +46,8 @@ public class Order {
         this.orderLine = new ArrayList<OrderLine>();
     }
 
-    public void setOrderLine(List<OrderLine> orderLine) {
-        this.orderLine = orderLine;
-        updated();
-    }
-
     public void addLine(int count, Item item) {
         this.orderLine.add(new OrderLine(count, item));
-        updated();
     }
 
     public double totalPrice() {

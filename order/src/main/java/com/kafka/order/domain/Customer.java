@@ -2,6 +2,7 @@ package com.kafka.order.domain;
 
 
 
+import com.kafka.order.config.Auditable;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Email;
 
 @Entity
 @Data
-public class Customer {
+public class Customer extends Auditable<String> {
 
 	@Id
 	@GeneratedValue
