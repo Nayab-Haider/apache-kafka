@@ -26,12 +26,4 @@ public class OrderLine {
         this.item = item;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public Item getItem() {
-        return item;
-    }
-
 }

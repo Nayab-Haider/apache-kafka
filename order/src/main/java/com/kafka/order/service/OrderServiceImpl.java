@@ -23,7 +23,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	public Order order(Order order) {
-		if (order == 0) {
+		if (order.getOrderLine().size() == 0) {
 			throw new IllegalArgumentException("No order lines!");
 		}
 		order.setUpdated(new Date());
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	private void fireOrderCreatedEvent(Order order) {
-		kafkaTemplate.send("order", order) + "created", order);
+		kafkaTemplate.send("order", order);
 	}
 
 	public double getPrice(long orderId) {

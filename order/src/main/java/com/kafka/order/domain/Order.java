@@ -46,10 +46,6 @@ public class Order {
         updated = new Date();
     }
 
-    public Address getShippingAddress() {
-        return shippingAddress;
-    }
-
     public void setShippingAddress(Address shippingAddress) {
         updated();
         this.shippingAddress = shippingAddress;
@@ -64,33 +60,9 @@ public class Order {
         this.billingAddress = billingAddress;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date created) {
-        this.updated = created;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
     public void setCustomer(Customer customer) {
         this.customer = customer;
         updated();
-    }
-
-    public List<OrderLine> getOrderLine() {
-        return orderLine;
     }
 
     public Order(Customer customer) {
@@ -107,10 +79,6 @@ public class Order {
     public void addLine(int count, Item item) {
         this.orderLine.add(new OrderLine(count, item));
         updated();
-    }
-
-    public int getNumberOfLines() {
-        return orderLine.size();
     }
 
     public double totalPrice() {
