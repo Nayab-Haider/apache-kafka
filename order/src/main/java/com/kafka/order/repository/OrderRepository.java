@@ -10,7 +10,4 @@ import java.util.Date;
 @Repository
 public interface OrderRepository extends PagingAndSortingRepository<Order, Long> {
 
-    @Query("SELECT max(o.updated) FROM Order o")
-    Date lastUpdate();
-
 }

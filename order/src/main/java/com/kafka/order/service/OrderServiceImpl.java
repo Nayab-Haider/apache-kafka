@@ -11,16 +11,11 @@ import java.util.Date;
 @Service
 public class OrderServiceImpl implements OrderService{
 
+	@Autowired
 	private OrderRepository orderRepository;
 
-	private KafkaTemplate<String, Order> kafkaTemplate;
-
 	@Autowired
-	private OrderServiceImpl(OrderRepository orderRepository, KafkaTemplate<String, Order> kafkaTemplate) {
-		super();
-		this.orderRepository = orderRepository;
-		this.kafkaTemplate = kafkaTemplate;
-	}
+	private KafkaTemplate<String, Order> kafkaTemplate;
 
 	public Order order(Order order) {
 		if (order.getOrderLine().size() == 0) {
