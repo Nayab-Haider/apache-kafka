@@ -28,4 +28,15 @@ public class Customer extends Auditable<String> {
 	@Column(nullable = false)
 	@Email
 	private String email;
+
+	public Customer(String firstname, String name, String email, String street, String city) {
+		super();
+		this.name = name;
+		this.firstname = firstname;
+		this.email = email;
+	}
+
+	public Customer(){
+
+	}
 }
