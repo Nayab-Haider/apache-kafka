@@ -17,7 +17,7 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    private ProducerFactory<String, Order> createProducerFactory() {
+    public ProducerFactory<String, Order> createProducerFactory() {
         Map<String, Object> configuration = new HashMap<>();
         configuration.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configuration.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
@@ -26,7 +26,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    private KafkaTemplate<String, Order> createKafkaTemplate() {
+    public KafkaTemplate<String, Order> createKafkaTemplate() {
         return new KafkaTemplate<>(createProducerFactory());
     }
 }
