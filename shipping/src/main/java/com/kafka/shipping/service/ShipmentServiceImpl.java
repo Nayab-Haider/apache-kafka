@@ -11,23 +11,25 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
 
-	private final Logger log = LoggerFactory.getLogger(ShipmentServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(ShipmentServiceImpl.class);
 
-	private ShipmentRepository shipmentRepository;
+    private ShipmentRepository shipmentRepository;
 
-	@Autowired
-	public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
-		super();
-		this.shipmentRepository = shipmentRepository;
-	}
+    @Autowired
+    public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
+        super();
+        this.shipmentRepository = shipmentRepository;
+    }
 
-	@Transactional
-	public void ship(Shipment shipment) {
-		if (shipmentRepository.existsById(shipment.getId())) {
-			log.info("Shipment id {} already exists - ignored", shipment.getId());
-		} else {
-			shipmentRepository.save(shipment);
-		}
-	}
+    @Transactional
+    public void ship(Shipment shipment) {
+        log.info("Received Shipment");
+        log.info(String.valueOf(shipment));
+        if (shipmentRepository.existsById(shipment.getId())) {
+            log.info("Shipment id {} already exists - ignored", shipment.getId());
+        } else {
+            shipmentRepository.save(shipment);
+        }
+    }
 
 }

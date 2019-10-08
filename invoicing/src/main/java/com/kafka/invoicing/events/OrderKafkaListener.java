@@ -22,7 +22,7 @@ public class OrderKafkaListener {
 
 	@KafkaListener(topics = "order")
 	public void order(Invoice invoice, Acknowledgment acknowledgment) {
-		log.info("Received invoice " + invoice.getId());
+		log.info("Received invoice ");
 		invoiceService.generateInvoice(invoice);
 		acknowledgment.acknowledge();
 	}

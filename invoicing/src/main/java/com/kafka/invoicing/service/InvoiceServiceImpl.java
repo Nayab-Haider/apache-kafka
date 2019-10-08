@@ -18,6 +18,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Transactional
     public void generateInvoice(Invoice invoice) {
+        log.info("Received invoice:--");
+        log.info(String.valueOf(invoice));
         if (invoiceRepository.existsById(invoice.getId())) {
             log.info("Invoice id {} already exists - ignored", invoice.getId());
         } else {
