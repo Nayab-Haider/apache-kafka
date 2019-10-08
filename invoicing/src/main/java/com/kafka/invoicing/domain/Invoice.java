@@ -1,5 +1,6 @@
 package com.kafka.invoicing.domain;
 
+import com.kafka.invoicing.config.Auditable;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,15 +10,13 @@ import java.util.List;
 
 @Entity
 @Data
-public class Invoice {
+public class Invoice extends Auditable<String>{
 
 	@Id
 	private long id;
 
 	@Embedded
 	private Customer customer;
-
-	private Date updated;
 
 	@Embedded
 	private Address billingAddress = new Address();
@@ -30,18 +29,12 @@ public class Invoice {
 		invoiceLine = new ArrayList<InvoiceLine>();
 	}
 
-	public Invoice(long id, Customer customer, Date updated, Address billingAddress, List<InvoiceLine> invoiceLine) {
+	public Invoice(long id, Customer customer, Address billingAddress, List<InvoiceLine> invoiceLine) {
 		super();
 		this.id = id;
 		this.customer = customer;
-		this.updated = updated;
 		this.billingAddress = billingAddress;
 		this.invoiceLine = invoiceLine;
-	}
-
-	@Transient
-	public void setOrderLine(List<InvoiceLine> orderLine) {
-		this.invoiceLine = orderLine;
 	}
 
 	public void addLine(int count, Item item) {
@@ -53,7 +46,4 @@ public class Invoice {
 				(d1, d2) -> d1 + d2);
 	}
 
-	public long getId() {
-		return id;
-	}
 }

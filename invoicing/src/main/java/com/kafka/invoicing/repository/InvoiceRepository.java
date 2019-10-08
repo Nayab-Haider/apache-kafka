@@ -7,8 +7,4 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Date;
 
 public interface InvoiceRepository extends PagingAndSortingRepository<Invoice, Long> {
-
-	@Query("SELECT max(i.updated) FROM Invoice i")
-	Date lastUpdate();
-
 }

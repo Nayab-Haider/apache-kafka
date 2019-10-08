@@ -1,9 +1,13 @@
 package com.kafka.invoicing.domain;
 
+import com.kafka.invoicing.config.Auditable;
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
-public class InvoiceLine {
+public class InvoiceLine extends Auditable<String> {
 
 	@Column(name = "F_COUNT")
 	private int count;
@@ -15,28 +19,12 @@ public class InvoiceLine {
 	@GeneratedValue
 	private long id;
 
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
 	public InvoiceLine() {
 	}
 
 	public InvoiceLine(int count, Item item) {
 		this.count = count;
 		this.item = item;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public Item getItem() {
-		return item;
 	}
 
 	public double totalAmount() {
